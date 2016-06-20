@@ -23,7 +23,7 @@ import java.util.concurrent.Callable;
 {{/async}}
 
 {{>generatedAnnotation}}
-@Api(value = "{{{baseName}}}", description = "the {{{baseName}}} API")
+@Api(value = "/{{{baseName}}}", description = "the {{{baseName}}} API")
 {{#operations}}
 public interface {{classname}} {
 {{#operation}}
@@ -37,7 +37,7 @@ public interface {{classname}} {
     }{{/hasAuthMethods}})
     @ApiResponses(value = { {{#responses}}
         @ApiResponse(code = {{{code}}}, message = "{{{message}}}", response = {{{returnType}}}.class){{#hasMore}},{{/hasMore}}{{/responses}} })
-    @RequestMapping(value = "{{{path}}}",{{#singleContentTypes}}
+    @RequestMapping(value = "{{{basePathWithoutHost}}}/{{{path}}}",{{#singleContentTypes}}
         produces = "{{{vendorExtensions.x-accepts}}}",
         consumes = "{{{vendorExtensions.x-contentType}}}",{{/singleContentTypes}}{{^singleContentTypes}}{{#hasProduces}}
         produces = { {{#produces}}"{{{mediaType}}}"{{#hasMore}}, {{/hasMore}}{{/produces}} }, {{/hasProduces}}{{#hasConsumes}}
